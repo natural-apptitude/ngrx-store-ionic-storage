@@ -49,7 +49,6 @@ function setNested(obj: any, path: string, value: any): any {
 function fetchState(): Promise<{}> {
   return storage
     .get(STORAGE_KEY)
-    .then(s => JSON.parse(s))
     .then(s => s || {})
     .catch(err => {});
 }
@@ -65,7 +64,7 @@ function saveState(state: any, keys: string[]): Promise<void> {
       return acc;
     }, {})
   }
-  return storage.set(STORAGE_KEY, JSON.stringify(state));
+  return storage.set(STORAGE_KEY, state);
 };
 
 export const StorageSyncActions = {
