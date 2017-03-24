@@ -10,15 +10,15 @@ import 'rxjs/add/operator/switchMap';
 
 const STORAGE_KEY = 'NSIS_APP_STATE';
 
-const storage = new Storage();
+const storage = new Storage({});
 
 // get/setNested inspired by
 // https://github.com/mickhansen/dottie.js
 function getNested(obj: any, path: string): any {
-  if(obj !== null && path) {
+  if (obj !== null && path) {
     // Recurse into the object.
     const parts = path.split('.').reverse();
-    while(obj != null && parts.length) {
+    while (obj != null && parts.length) {
       obj = obj[parts.pop()];
     }
   }
@@ -26,17 +26,17 @@ function getNested(obj: any, path: string): any {
 }
 
 function setNested(obj: any, path: string, value: any): any {
-  if(obj != null && path) {
+  if (obj != null && path) {
     let pieces = path.split('.'),
-        current = obj,
-        piece, i,
-        length = pieces.length;
+      current = obj,
+      piece, i,
+      length = pieces.length;
 
-    for(i = 0; i < length; i++) {
+    for (i = 0; i < length; i++) {
       piece = pieces[i];
-      if(i === length-1) {
+      if (i === length - 1) {
         current[piece] = value;
-      } else if(!current[piece]) {
+      } else if (!current[piece]) {
         current[piece] = {};
       }
       current = current[piece];
@@ -50,15 +50,15 @@ function fetchState(): Promise<{}> {
   return storage
     .get(STORAGE_KEY)
     .then(s => s || {})
-    .catch(err => {});
+    .catch(err => { });
 }
 
 function saveState(state: any, keys: string[]): Promise<void> {
   // Pull out the portion of the state to save.
-  if(keys) {
+  if (keys) {
     state = keys.reduce((acc, k) => {
       const val = getNested(state, k);
-      if(val) {
+      if (val) {
         setNested(acc, k, val);
       }
       return acc;
@@ -97,7 +97,7 @@ export interface StorageSyncOptions {
 const defaultOptions: StorageSyncOptions = {
   keys: [],
   ignoreActions: [],
-  onSyncError: (err) => {}
+  onSyncError: (err) => { }
 }
 
 export function storageSync(options?: StorageSyncOptions) {
@@ -111,16 +111,16 @@ export function storageSync(options?: StorageSyncOptions) {
     return (state: any, action: any) => {
       const { type, payload } = action;
 
-      if(type === StorageSyncActions.HYDRATED) {
+      if (type === StorageSyncActions.HYDRATED) {
         state = payload;
-        if(hydratedStateKey) {
+        if (hydratedStateKey) {
           hydratedState[hydratedStateKey] = true;
         }
       }
 
       const nextState = Object.assign({}, reducer(state, action), hydratedState);
 
-      if(ignoreActions.indexOf(type) === -1) {
+      if (ignoreActions.indexOf(type) === -1) {
         saveState(nextState, keys).catch(err => onSyncError(err));
       }
 

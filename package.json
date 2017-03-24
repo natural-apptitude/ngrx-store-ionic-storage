@@ -1,6 +1,6 @@
 {
   "name": "ngrx-store-ionic-storage",
-  "version": "2.0.0",
+  "version": "3.0.0-beta.1",
   "description": "Simple storage syncing between @ngrx/store and @ionic/storage.",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -29,23 +29,23 @@
     "dist"
   ],
   "devDependencies": {
-    "@angular/core": "2.2.1",
-    "@angular/compiler": "2.2.1",
-    "@angular/compiler-cli": "2.2.1",
-    "@ionic/storage": "1.1.7",
+    "@angular/core": "2.4.8",
+    "@angular/compiler": "2.4.8",
+    "@angular/compiler-cli": "2.4.8",
+    "@ionic/storage": "2.0.1",
     "@ngrx/core": "1.2.0",
     "@ngrx/effects": "2.0.0",
     "@ngrx/store": "2.2.1",
     "rimraf": "latest",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "5.0.1",
     "typescript": "2.0.9",
-    "zone.js": "0.6.26"
+    "zone.js": "0.7.2"
   },
   "peerDependencies": {
-    "@angular/core": "^2.2.1",
-    "@ionic/storage": "^1.1.7",
+    "@angular/core": "^2.4.8",
+    "@ionic/storage": "^2.0.1",
     "@ngrx/effects": "^2.0.0",
     "@ngrx/store": "^2.2.1",
-    "rxjs": "^5.0.0-beta.12"
+    "rxjs": "^5.0.1"
   }
 }
