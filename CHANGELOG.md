@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0] - 2017-04-12
+### Changed
+- Support Ionic 3.
+- Support for Ionic Storage 2+ only.
+
+**Breaking Change Alert**
+
+If you are using Ionic Storage v1 and are reluctant to upgrade to v2, please continue to use v2.0.0 of this library.
+
+When upgrading to v3.0.0 of this library, please ensure you are using Ionic Storage v2 in your app.
+
 ## [2.0.0] - 2017-03-02
 ### Changed
 - Values are now stored as their native data type, i.e. objects are stored as objects, arrays as arrays, etc. Prior to this release, all values were stringified for storage, and destringified when retrieved.
