@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
-import { Action, Dispatcher } from '@ngrx/store';
+import { Store, Action, ActionReducerMap, ActionReducer } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of'
 import { defer } from 'rxjs/observable/defer'
 
 const STORAGE_KEY = 'NSIS_APP_STATE';
@@ -75,16 +76,35 @@ export const StorageSyncActions = {
 @Injectable()
 export class StorageSyncEffects {
 
-  constructor(private actions$: Actions) { }
+  constructor(private actions$: Actions, private store: Store<any>) { }
 
-  @Effect() hydrate$: Observable<Action> = defer(() => {
-      Observable
-        .fromPromise(fetchState())
-        .map((state: any) => ({
-          type: StorageSyncActions.HYDRATED,
-          payload: state
-        }))
-  }) 
+  @Effect({ dispatch: false}) hydrate$: Observable<any> = defer(() => {
+    console.log('ngrx / storage init')
+    fetchState()
+      .then(s => {
+        console.log('storage state hydrated')
+        this.store.dispatch({
+            type: StorageSyncActions.HYDRATED,
+            payload: s
+        })
+      })
+  })
+
+  @Effect() test$: Observable<Action> = this.actions$
+      .ofType(StorageSyncActions.HYDRATED)
+      .map(a => a)
+      .switchMap(p => Observable.of({ type: 'TEST_ACTION_SUCCESS', payload: 'test succeeded'}))
+      // Observable
+      //   .fromPromise(fetchState())
+      //   .map((state: any) => {
+      //     console.log('state hydrated from store')
+      //     this.store.dispatch(
+      //     {
+      //       type: StorageSyncActions.HYDRATED,
+      //       payload: state
+      //     })
+      //   })
+ 
 }
 
 export interface StorageSyncOptions {
@@ -107,7 +127,7 @@ export function storageSync(options?: StorageSyncOptions) {
 
   const hydratedState: any = {};
 
-  return function storageSyncReducer(reducer: Function) {
+  return function storageSyncReducer(reducer: ActionReducer<any>) {
     return (state: any, action: any) => {
       const { type, payload } = action;
 
@@ -126,5 +146,11 @@ export function storageSync(options?: StorageSyncOptions) {
 
       return nextState;
     }
+  }
+}
+
+export function storeageReducer(reducer: ActionReducer<any>): ActionReducer<any, any> {
+  return function(state: any, action: any) {
+
   }
 }

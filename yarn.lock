@@ -32,17 +32,13 @@
     localforage "~1.4.2"
     localforage-cordovasqlitedriver "~1.5.0"
 
-"@ngrx/core@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/core/-/core-1.2.0.tgz#882b46abafa2e0e6d887cb71a1b2c2fa3e6d0dc6"
+"@ngrx/effects@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-4.0.2.tgz#31d6d14b1ca2380b5be061e91d9a0edb0f0f27c7"
 
-"@ngrx/effects@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-2.0.2.tgz#8255e29cc0276f108784c90481e3b96e6713154b"
-
-"@ngrx/store@2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-2.2.1.tgz#316ec1e43aa5a0166e5e6e1aa2c34a4049386510"
+"@ngrx/store@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-4.0.2.tgz#bd0388f0444a78b87059738274a3d3b5cc43e402"
 
 "@types/localforage@0.0.30":
   version "0.0.30"
@@ -253,9 +249,9 @@ rimraf@latest:
   dependencies:
     glob "^7.0.5"
 
-rxjs@5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.1.1.tgz#fc48922965bc6c5efbcc0fe46e90a3af64137a7b"
+rxjs@^5.4.2:
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.4.2.tgz#2a3236fcbf03df57bae06fd6972fd99e5c08fcf7"
   dependencies:
     symbol-observable "^1.0.1"
 
@@ -303,9 +299,9 @@ tsickle@^0.21.0:
     source-map "^0.5.6"
     source-map-support "^0.4.2"
 
-typescript@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.1.tgz#4862b662b988a4c8ff691cc7969622d24db76ae9"
+typescript@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
 
 unreachable-branch-transform@^0.3.0:
   version "0.3.0"
