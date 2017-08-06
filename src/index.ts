@@ -62,6 +62,7 @@ function saveState(state: any, keys: string[]): Promise<void> {
       return acc;
     }, {})
   }
+
   return storage.set(STORAGE_KEY, state);
 };
 
@@ -103,6 +104,7 @@ export function storageSync(options?: StorageSyncOptions) {
   const { keys, ignoreActions, hydratedStateKey, onSyncError } = Object.assign({}, defaultOptions, options || {});
 
   ignoreActions.push(StorageSyncActions.HYDRATED);
+  ignoreActions.push('@ngrx/store/init')
 
   const hydratedState: any = {};
 
