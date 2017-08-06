@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { defer } from 'rxjs/observable/defer'
 
 const STORAGE_KEY = 'NSIS_APP_STATE';
 
@@ -76,15 +77,14 @@ export class StorageSyncEffects {
 
   constructor(private actions$: Actions) { }
 
-  @Effect() hydrate$: Observable<Action> = this.actions$
-    .ofType(Dispatcher.INIT)
-    .switchMap(() =>
+  @Effect() hydrate$: Observable<Action> = defer(() => {
       Observable
         .fromPromise(fetchState())
         .map((state: any) => ({
           type: StorageSyncActions.HYDRATED,
           payload: state
-        })));
+        }))
+  }) 
 }
 
 export interface StorageSyncOptions {
@@ -102,7 +102,7 @@ const defaultOptions: StorageSyncOptions = {
 
 export function storageSync(options?: StorageSyncOptions) {
   const { keys, ignoreActions, hydratedStateKey, onSyncError } = Object.assign({}, defaultOptions, options || {});
-  ignoreActions.push(Dispatcher.INIT);
+
   ignoreActions.push(StorageSyncActions.HYDRATED);
 
   const hydratedState: any = {};
