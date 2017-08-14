@@ -1,6 +1,6 @@
 {
   "name": "ngrx-store-ionic-storage",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Simple storage syncing between @ngrx/store and @ionic/storage.",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
