@@ -1,10 +1,10 @@
 # ngrx-store-ionic-storage
 
-Simple syncing between @ngrx/store and Ionic Storage.
+Simple syncing between @ngrx 4 and Ionic Storage.
 
 ## Dependencies
 
-This library depends on [@ngrx/store](https://github.com/ngrx/store), [@ngrx/effects](https://github.com/ngrx/effects) and [Ionic 2](https://ionicframework.com/docs/).
+This library depends on the sotre and effects modules from [@ngrx/platform](https://github.com/ngrx/platform) and [Ionic 2](https://ionicframework.com/docs/).
 
 ## Installation
 
@@ -27,22 +27,22 @@ ionic plugin add cordova-sqlite-storage --save
 1. In your app's module, import the `StorageSyncEffects` and run it through the `EffectsModule`.
 2. Pass options into the `storageSync` function to create a meta-reducer, and compose it with your other reducers.
 
-Here is an example with two app-specific reducers, `books` and `collection`.
+Here is an example with two app-specific reducers, `books` and `collection`, and a state object `appState`.
 
 ``` js
 import { NgModule } from '@angular/core';
-import { compose } from '@ngrx/core/compose';
-import { StoreModule, combineReducers } from '@ngrx/store';
+import { StoreModule, ActionReducerMaps, ActionReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StorageSyncEffects, storageSync } from 'ngrx-store-ionic-storage';
 import { BookActions, CollectionActions } from './actions';
 import { booksReducer, collectionReducer } from './reducers';
+import { appState } from './app-state'
 
 export function onSyncError(err) {
   console.log(err);
 }
 
-export const reducers = {
+export const reducers: ActionReducerMap<appState> = {
   books: booksReducer,
   collection: collectionReducer
 };
@@ -57,12 +57,16 @@ export const storageSyncReducer = storageSync({
   onSyncError: onSyncError      // If a sync fails
 });
 
-export const appReducer = compose(storageSyncReducer, combineReducers)(reducers);
+export function storageMetaReducer(reducer: ActionReducer<any>): ActionReducer<any, any> {
+  return storageSyncReducer(reducer);
+}
+
+export const metaReducers: ActionReducer<any, any>[] = [storageMetaReducer];
 
 @NgModule({
   imports: [
-    StoreModule.provideStore(appReducer)
-    EffectsModule.run(StorageSyncEffects)
+    StoreModule.forRoot(reducers, { metaReducers })
+    EffectsModule.forRoot([ StorageSyncEffects ])
   ]
 })
 export class MyAppModule {}
