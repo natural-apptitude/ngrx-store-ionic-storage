@@ -4,7 +4,7 @@ Simple syncing between @ngrx 4 and Ionic Storage.
 
 ## Dependencies
 
-This library depends on the sotre and effects modules from [@ngrx/platform](https://github.com/ngrx/platform) and [Ionic 2](https://ionicframework.com/docs/).
+This library depends on the store and effects modules from [@ngrx/platform](https://github.com/ngrx/platform) and [Ionic 2](https://ionicframework.com/docs/).
 
 ## Installation
 
