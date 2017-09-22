@@ -19,7 +19,7 @@ npm install @ngrx/core @ngrx/store @ngrx/effects @ionic/storage ngrx-store-ionic
 Next, make sure you have installed the `cordova-sqlite-storage` plugin. This allows Ionic Storage to use the most optimal storage mechanism available, depending on the target device.
 
 ```
-ionic plugin add cordova-sqlite-storage --save
+ionic cordova plugin add cordova-sqlite-storage --save
 ```
 
 ## Usage
