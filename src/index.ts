@@ -91,7 +91,7 @@ export interface StorageSyncOptions {
   keys?: string[];
   ignoreActions?: string[];
   hydratedStateKey?: string;
-  onSyncError?: (err) => void
+  onSyncError?: (err: any) => void;
 };
 
 const defaultOptions: StorageSyncOptions = {
