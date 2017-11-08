@@ -104,7 +104,8 @@ export function storageSync(options?: StorageSyncOptions) {
   const { keys, ignoreActions, hydratedStateKey, onSyncError } = Object.assign({}, defaultOptions, options || {});
 
   ignoreActions.push(StorageSyncActions.HYDRATED);
-  ignoreActions.push('@ngrx/store/init')
+  ignoreActions.push('@ngrx/store/init');
+  ignoreActions.push('@ngrx/effects/init');
 
   const hydratedState: any = {};
 
