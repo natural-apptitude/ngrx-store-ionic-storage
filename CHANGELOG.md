@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.1] - 2017-11-09
+### Changed
+- Merged PR#10 - Ignore ngrx/effects actions
+
 ## [4.0.0] - 2017-08-14
 **Breaking**
 
