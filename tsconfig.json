@@ -4,19 +4,24 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "declaration": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "outDir": "dist",
+    "outDir": "./dist/",
+    "rootDir": "./src",
     "lib": [
-      "es2015",
+      "es2017",
       "dom"
     ]
   },
   "files": [
-    "src/index.ts"
+    "./src/index.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": true
+    "strictMetadataEmit": true,
+    "preserveWhitespaces": false
   }
 }
