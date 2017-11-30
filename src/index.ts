@@ -83,7 +83,7 @@ export class StorageSyncEffects {
             payload: s
         })
       })
-      .catch(e => console.log(e))
+      .catch(e => console.log(`error fetching data from store for hydration: ${e}`))
   }) 
 }
 
