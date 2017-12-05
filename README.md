@@ -31,7 +31,7 @@ Here is an example with two app-specific reducers, `books` and `collection`, and
 
 ``` js
 import { NgModule } from '@angular/core';
-import { StoreModule, ActionReducerMaps, ActionReducer } from '@ngrx/store';
+import { StoreModule, ActionReducerMaps, ActionReducer, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StorageSyncEffects, storageSync } from 'ngrx-store-ionic-storage';
 import { BookActions, CollectionActions } from './actions';
@@ -61,7 +61,7 @@ export function storageMetaReducer(reducer: ActionReducer<any>): ActionReducer<a
   return storageSyncReducer(reducer);
 }
 
-export const metaReducers: ActionReducer<any, any>[] = [storageMetaReducer];
+export const metaReducers: MetaReducer<any, any>[] = [storageMetaReducer];
 
 @NgModule({
   imports: [
