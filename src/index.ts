@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { Effect } from '@ngrx/effects';
 import { Store, Action, ActionReducer } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Storage } from '@ionic/storage';
-
 import { defer } from 'rxjs/observable/defer'
+
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { Storage } from '@ionic/storage';
 
 const STORAGE_KEY = 'NSIS_APP_STATE';
 
@@ -73,18 +77,20 @@ export const StorageSyncActions = {
 @Injectable()
 export class StorageSyncEffects {
 
-  constructor(private store: Store<any>) { }
+  @Effect() hydrate$: Observable<any> = defer(() =>
+    Observable.fromPromise(fetchState())
+      .map(state => ({
+        type: StorageSyncActions.HYDRATED,
+        payload: state
+      }))
+      .catch(e => {
+        console.warn(`error fetching data from store for hydration: ${e}`);
 
-  @Effect({ dispatch: false}) hydrate$: Observable<any> = defer(() => {
-    fetchState()
-      .then(s => {
-        this.store.dispatch({
-            type: StorageSyncActions.HYDRATED,
-            payload: s
-        })
-      })
-      .catch(e => console.log(`error fetching data from store for hydration`))
-  }) 
+        return Observable.of({
+          type: StorageSyncActions.HYDRATED,
+          payload: {}
+        });
+      }));
 }
 
 export interface StorageSyncOptions {
@@ -106,6 +112,7 @@ export function storageSync(options?: StorageSyncOptions) {
   ignoreActions.push(StorageSyncActions.HYDRATED);
   ignoreActions.push('@ngrx/store/init');
   ignoreActions.push('@ngrx/effects/init');
+  ignoreActions.push('@ngrx/store/update-reducers');
 
   const hydratedState: any = {};
 
@@ -114,7 +121,7 @@ export function storageSync(options?: StorageSyncOptions) {
       const { type, payload } = action;
 
       if (type === StorageSyncActions.HYDRATED) {
-        state = payload;
+        state = Object.assign({}, state, payload);
         if (hydratedStateKey) {
           hydratedState[hydratedStateKey] = true;
         }

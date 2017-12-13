@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.0] - 2017-12-13
+- Fix #18 - Ignore store for-feature action
+- Fix #13 - Avoid store injection to fix AOT issues
+- Fix #7 - Object.assign state
+
 ## [4.0.1] - 2017-11-09
 ### Changed
 - Merged PR#10 - Ignore ngrx/effects actions
