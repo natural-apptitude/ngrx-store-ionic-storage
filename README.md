@@ -65,7 +65,12 @@ export const metaReducers: MetaReducer<any, any>[] = [storageMetaReducer];
 
 @NgModule({
   imports: [
-    StoreModule.forRoot(reducers, { metaReducers })
+    StoreModule.forRoot(reducers, { 
+      metaReducers,
+      initialState: {
+        hydrated: false
+      }
+    })
     EffectsModule.forRoot([ StorageSyncEffects ])
   ]
 })
@@ -78,6 +83,35 @@ export class MyAppModule {}
 - `ignoreActions`: don't sync whenever any of these actions are fired.
 - `hydratedStateKey`: if present, the sync reducer will add a flag to your app state when the initial hydration has completed. You can bind an observable to this flag, and so be notified when the app has been hydrated.
 - `onSyncError`: a callback, called whenever there was an error syncing the state. The callback is passed a single `err` parameter.
+
+## If main reducer is an ActionReducerMap
+
+`hydrated.reducer.ts`
+```js
+import { Action } from '@ngrx/store';
+
+export interface HydratedState {}
+
+export function reducer(state: boolean = false, action: Action): State {
+    return state;
+};
+```
+
+`main.reducer.ts`
+```js
+import { ActionReducerMap } from '@ngrx/store';
+import * as fromHydrated from './hydrated.reducer';
+
+export interface State {
+    hydrated: fromHydrated.State
+    //...
+}
+
+export const reducer: ActionReducerMap<State> = {
+    hydrated: fromHydrated.reducer
+    //...
+};
+```
 
 ## How It Works
 
