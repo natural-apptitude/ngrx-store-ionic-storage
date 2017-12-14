@@ -90,7 +90,7 @@ export class MyAppModule {}
 ```js
 import { Action } from '@ngrx/store';
 
-export interface State {}
+export interface HydratedState {}
 
 export function reducer(state: boolean = false, action: Action): State {
     return state;
@@ -102,7 +102,7 @@ export function reducer(state: boolean = false, action: Action): State {
 import { ActionReducerMap } from '@ngrx/store';
 import * as fromHydrated from './hydrated.reducer';
 
-export interface HydratedState {
+export interface State {
     hydrated: fromHydrated.State
     //...
 }
