@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Effect } from '@ngrx/effects';
 import { ActionReducer } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { defer } from 'rxjs'
+import { Observable, of, defer } from 'rxjs';
 
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { map, catchError } from 'rxjs/operators';
