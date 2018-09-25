@@ -6,7 +6,8 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist && ngc",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
