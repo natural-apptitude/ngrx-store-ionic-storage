@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Effect } from '@ngrx/effects';
-import { Store, Action, ActionReducer } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { defer } from 'rxjs/observable/defer'
+import { ActionReducer } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { defer } from 'rxjs'
 
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { fromPromise } from 'rxjs/internal-compatibility';
+import { map, catchError } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 
-const STORAGE_KEY = 'NSIS_APP_STATE';
+const STORAGE_KEY = 'APP_STATE';
 
 const storage = new Storage({});
 
@@ -52,7 +50,8 @@ function fetchState(): Promise<{}> {
   return storage
     .get(STORAGE_KEY)
     .then(s => s || {})
-    .catch(err => { });
+    .catch(err => {
+    });
 }
 
 function saveState(state: any, keys: string[]): Promise<void> {
@@ -68,29 +67,32 @@ function saveState(state: any, keys: string[]): Promise<void> {
   }
 
   return storage.set(STORAGE_KEY, state);
-};
+}
 
 export const StorageSyncActions = {
-  HYDRATED: 'NSIS_APP_HYDRATED'
-}
+  HYDRATED: 'APP_STATE_HYDRATED'
+};
 
 @Injectable()
 export class StorageSyncEffects {
 
   @Effect() hydrate$: Observable<any> = defer(() =>
-    Observable.fromPromise(fetchState())
-      .map(state => ({
-        type: StorageSyncActions.HYDRATED,
-        payload: state
-      }))
-      .catch(e => {
-        console.warn(`error fetching data from store for hydration: ${e}`);
-
-        return Observable.of({
+    fromPromise(fetchState())
+      .pipe(
+        map(state => ({
           type: StorageSyncActions.HYDRATED,
-          payload: {}
-        });
-      }));
+          payload: state
+        })),
+        catchError(e => {
+          console.warn(`error fetching data from store for hydration: ${e}`);
+
+          return of({
+            type: StorageSyncActions.HYDRATED,
+            payload: {}
+          });
+        })
+      )
+  );
 }
 
 export interface StorageSyncOptions {
@@ -98,16 +100,17 @@ export interface StorageSyncOptions {
   ignoreActions?: string[];
   hydratedStateKey?: string;
   onSyncError?: (err: any) => void;
-};
+}
 
 const defaultOptions: StorageSyncOptions = {
   keys: [],
   ignoreActions: [],
-  onSyncError: (err) => { }
-}
+  onSyncError: (err) => {
+  }
+};
 
 export function storageSync(options?: StorageSyncOptions) {
-  const { keys, ignoreActions, hydratedStateKey, onSyncError } = Object.assign({}, defaultOptions, options || {});
+  const {keys, ignoreActions, hydratedStateKey, onSyncError} = Object.assign({}, defaultOptions, options || {});
 
   ignoreActions.push(StorageSyncActions.HYDRATED);
   ignoreActions.push('@ngrx/store/init');
@@ -118,7 +121,7 @@ export function storageSync(options?: StorageSyncOptions) {
 
   return function storageSyncReducer(reducer: ActionReducer<any>) {
     return (state: any, action: any) => {
-      const { type, payload } = action;
+      const {type, payload} = action;
 
       if (type === StorageSyncActions.HYDRATED) {
         state = Object.assign({}, state, payload);
