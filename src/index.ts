@@ -7,7 +7,7 @@ import { fromPromise } from 'rxjs/internal-compatibility';
 import { map, catchError } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 
-const STORAGE_KEY = 'APP_STATE';
+export const STORAGE_STATE_KEY = 'APP_STATE';
 
 const storage = new Storage({});
 
@@ -47,7 +47,7 @@ function setNested(obj: any, path: string, value: any): any {
 
 function fetchState(): Promise<{}> {
   return storage
-    .get(STORAGE_KEY)
+    .get(STORAGE_STATE_KEY)
     .then(s => s || {})
     .catch(err => {
     });
@@ -65,7 +65,7 @@ function saveState(state: any, keys: string[]): Promise<void> {
     }, {})
   }
 
-  return storage.set(STORAGE_KEY, state);
+  return storage.set(STORAGE_STATE_KEY, state);
 }
 
 export const StorageSyncActions = {
