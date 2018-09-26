@@ -108,7 +108,7 @@ const defaultOptions: StorageSyncOptions = {
   }
 };
 
-export function storageSync(options?: StorageSyncOptions) {
+export const storageSync = (options?: StorageSyncOptions) => {
   const {keys, ignoreActions, hydratedStateKey, onSyncError} = Object.assign({}, defaultOptions, options || {});
 
   ignoreActions.push(StorageSyncActions.HYDRATED);
@@ -126,6 +126,7 @@ export function storageSync(options?: StorageSyncOptions) {
       console.log(type);
 
       if (type === StorageSyncActions.HYDRATED) {
+        console.log('rehydrated', payload);
         state = Object.assign({}, state, payload);
         if (hydratedStateKey) {
           hydratedState[hydratedStateKey] = true;
