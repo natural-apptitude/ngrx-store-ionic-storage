@@ -69,7 +69,7 @@ function saveState(state: any, keys: string[]): Promise<void> {
 }
 
 export const StorageSyncActions = {
-  HYDRATED: 'APP_STATE_HYDRATED'
+  HYDRATED: 'APP_STATE_REHYDRATE'
 };
 
 @Injectable()
@@ -115,12 +115,15 @@ export function storageSync(options?: StorageSyncOptions) {
   ignoreActions.push('@ngrx/store/init');
   ignoreActions.push('@ngrx/effects/init');
   ignoreActions.push('@ngrx/store/update-reducers');
+  ignoreActions.push('ROUTER_NAVIGATION');
 
   const hydratedState: any = {};
 
   return function storageSyncReducer(reducer: ActionReducer<any>) {
     return (state: any, action: any) => {
       const {type, payload} = action;
+
+      console.log(type);
 
       if (type === StorageSyncActions.HYDRATED) {
         state = Object.assign({}, state, payload);
