@@ -115,7 +115,6 @@ export const storageSync = (options?: StorageSyncOptions) => {
   ignoreActions.push('@ngrx/store/init');
   ignoreActions.push('@ngrx/effects/init');
   ignoreActions.push('@ngrx/store/update-reducers');
-  ignoreActions.push('ROUTER_NAVIGATION');
 
   const hydratedState: any = {};
 
@@ -123,10 +122,7 @@ export const storageSync = (options?: StorageSyncOptions) => {
     return (state: any, action: any) => {
       const {type, payload} = action;
 
-      console.log(type);
-
       if (type === StorageSyncActions.HYDRATED) {
-        console.log('rehydrated', payload);
         state = Object.assign({}, state, payload);
         if (hydratedStateKey) {
           hydratedState[hydratedStateKey] = true;
@@ -142,4 +138,4 @@ export const storageSync = (options?: StorageSyncOptions) => {
       return nextState;
     }
   }
-}
+};
