@@ -42,10 +42,10 @@
     "zone.js": "0.8.26"
   },
   "peerDependencies": {
-    "@angular/core": "^6.0.0",
+    "@angular/core": "^6.0.0 || ^7.0.0",
     "@ionic/storage": "^2.2.0",
-    "@ngrx/effects": "^6.1.0",
-    "@ngrx/store": "^6.1.0",
-    "rxjs": "^6.2.2"
+    "@ngrx/effects": "^6.0.0 || ^7.0.0",
+    "@ngrx/store": "^6.0.0 || ^7.0.0",
+    "rxjs": "^6.0.0"
   }
 }
