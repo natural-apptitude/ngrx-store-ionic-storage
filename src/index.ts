@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Effect } from '@ngrx/effects';
-import { Store, Action, ActionReducer } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { defer } from 'rxjs/observable/defer'
-
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { Storage } from '@ionic/storage';
+import { Effect } from '@ngrx/effects';
+import { ActionReducer } from '@ngrx/store';
+import { defer, from, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 const STORAGE_KEY = 'NSIS_APP_STATE';
 
@@ -78,19 +73,21 @@ export const StorageSyncActions = {
 export class StorageSyncEffects {
 
   @Effect() hydrate$: Observable<any> = defer(() =>
-    Observable.fromPromise(fetchState())
-      .map(state => ({
+    from(fetchState()).pipe(
+      map(state => ({
         type: StorageSyncActions.HYDRATED,
         payload: state
-      }))
-      .catch(e => {
+      })),
+      catchError(e => {
         console.warn(`error fetching data from store for hydration: ${e}`);
 
-        return Observable.of({
+        return of({
           type: StorageSyncActions.HYDRATED,
           payload: {}
         });
-      }));
+      })
+    )
+      );
 }
 
 export interface StorageSyncOptions {
