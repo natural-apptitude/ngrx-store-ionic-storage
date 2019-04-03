@@ -2,7 +2,7 @@
 
 Simple syncing between @ngrx 4 and Ionic Storage.
 
-* If you are looking to use this package with an Ionic 4 app, please use [version 5](README.md). *
+**If you are looking to use this package with an Ionic 4 app, please use [version 5](README.md) of this package.**
 
 ## Dependencies
 

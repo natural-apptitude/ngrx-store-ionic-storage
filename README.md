@@ -2,7 +2,7 @@
 
 Simple syncing between @ngrx 7 and Ionic Storage.
 
-* If you are looking to use this package with an Ionic 2 or 3 app, please use [version 4](README-v4.md). *
+**If you are looking to use this package with an Ionic 2 or 3 app, please use [version 4](README-v4.md) of this package.**
 
 ## Dependencies
 
@@ -123,7 +123,7 @@ The sync reducer will only store the portion of state provided in the `keys` opt
 
 ## Why?
 
-Much of this library is based on [ngrx-store-localstorage](https://github.com/btroncone/ngrx-store-localstorage). While this is an excellent choice for desktop web browsers, for Ionic apps a better solution exists for local storage: [Ionic Storage](https://ionicframework.com/docs/v2/storage/). This provides a more robust storage mechanism, depending on the device where the app is running. Since Ionic Storage is asynchronous, the functionality needed to be written from the ground-up to support an async get/set operation.
+Much of this library is based on [ngrx-store-localstorage](https://github.com/btroncone/ngrx-store-localstorage). While this is an excellent choice for desktop web browsers, for Ionic apps a better solution exists for local storage: [Ionic Storage](https://ionicframework.com/docs/building/storage). This provides a more robust storage mechanism, depending on the device where the app is running. Since Ionic Storage is asynchronous, the functionality needed to be written from the ground-up to support an async get/set operation.
 
 ## License
 
