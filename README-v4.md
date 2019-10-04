@@ -1,27 +1,27 @@
 # ngrx-store-ionic-storage
 
-Simple syncing between @ngrx 7 and Ionic Storage.
+Simple syncing between @ngrx 4 and Ionic Storage.
 
-**If you are looking to use this package with an Ionic 2 or 3 app, please use [version 4](README-v4.md) of this package.**
+**If you are looking to use this package with an Ionic 4 app, please use [version 5](README.md) of this package.**
 
 ## Dependencies
 
-This library depends on the store and effects modules from [@ngrx/platform](https://github.com/ngrx/platform) and [Ionic 4](https://ionicframework.com/docs/).
+This library depends on the store and effects modules from [@ngrx/platform](https://github.com/ngrx/platform) and [Ionic 2](https://ionicframework.com/docs/).
 
 ## Installation
 
-Make sure you have a scaffolded Ionic 4 app. This library supports Ionic version 4 and above. For more details, see the [Ionic documentation](https://ionicframework.com/docs/building/starting).
+Make sure you have a scaffolded Ionic 2 app. This library supports Ionic version 2 and above. For more details, see the [Ionic documentation](https://ionicframework.com/docs/v2/setup/installation/).
 
 Then run:
 
 ```
-npm install @ngrx/store @ngrx/effects @ionic/storage ngrx-store-ionic-storage
+npm install @ngrx/store@^4.1.1 @ngrx/effects@^4.1.1 @ionic/storage ngrx-store-ionic-storage --save
 ```
 
 Next, make sure you have installed the `cordova-sqlite-storage` plugin. This allows Ionic Storage to use the most optimal storage mechanism available, depending on the target device.
 
 ```
-ionic cordova plugin add cordova-sqlite-storage
+ionic cordova plugin add cordova-sqlite-storage --save
 ```
 
 ## Usage
@@ -123,7 +123,7 @@ The sync reducer will only store the portion of state provided in the `keys` opt
 
 ## Why?
 
-Much of this library is based on [ngrx-store-localstorage](https://github.com/btroncone/ngrx-store-localstorage). While this is an excellent choice for desktop web browsers, for Ionic apps a better solution exists for local storage: [Ionic Storage](https://ionicframework.com/docs/building/storage). This provides a more robust storage mechanism, depending on the device where the app is running. Since Ionic Storage is asynchronous, the functionality needed to be written from the ground-up to support an async get/set operation.
+Much of this library is based on [ngrx-store-localstorage](https://github.com/btroncone/ngrx-store-localstorage). While this is an excellent choice for desktop web browsers, for Ionic apps a better solution exists for local storage: [Ionic Storage](https://ionicframework.com/docs/v2/storage/). This provides a more robust storage mechanism, depending on the device where the app is running. Since Ionic Storage is asynchronous, the functionality needed to be written from the ground-up to support an async get/set operation.
 
 ## License
 
