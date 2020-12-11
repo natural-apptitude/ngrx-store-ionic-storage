@@ -1,6 +1,6 @@
 {
   "name": "ngrx-store-ionic-storage",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "Simple storage syncing between @ngrx/store and @ionic/storage.",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natural-apptitude/ngrx-store-ionic-storage.git"
+    "url": "git+https://github.com/rocco/ngrx-store-ionic-storage.git"
   },
   "keywords": [
     "redux",
@@ -23,29 +23,29 @@
   "author": "Natural Apptitude Ltd.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/natural-apptitude/ngrx-store-ionic-storage/issues"
+    "url": "https://github.com/rocco/ngrx-store-ionic-storage/issues"
   },
-  "homepage": "https://github.com/natural-apptitude/ngrx-store-ionic-storage#readme",
+  "homepage": "https://github.com/rocco/ngrx-store-ionic-storage#readme",
   "files": [
     "dist"
   ],
   "devDependencies": {
-    "@angular/compiler": "^7.0.1",
-    "@angular/compiler-cli": "^7.0.1",
-    "@angular/core": "^7.0.1",
-    "@ionic/storage": "^2.2.0",
-    "@ngrx/effects": "^7.0.0",
-    "@ngrx/store": "^7.0.0",
+    "@angular/compiler": "~10.0.0",
+    "@angular/compiler-cli": "~10.0.0",
+    "@angular/core": "~10.0.0",
+    "@ionic/storage": "^2.3.1",
+    "@ngrx/effects": "^10.1.0",
+    "@ngrx/store": "^10.1.0",
     "rimraf": "latest",
-    "rxjs": "^6.3.3",
-    "typescript": "~3.1.1",
-    "zone.js": "0.8.26"
+    "rxjs": "^6.6.3",
+    "typescript": "^3.9.7",
+    "zone.js": "~0.10.3"
   },
   "peerDependencies": {
-    "@angular/core": "^7.0.1",
-    "@ionic/storage": "^2.0.1",
-    "@ngrx/effects": "^7.0.0",
-    "@ngrx/store": "^7.0.0",
-    "rxjs": "^6.3.3"
+    "@angular/core": "~10.0.0",
+    "@ionic/storage": "^2.3.1",
+    "@ngrx/effects": "^10.1.0",
+    "@ngrx/store": "^10.1.0",
+    "rxjs": "^6.6.3"
   }
 }

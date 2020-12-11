@@ -7,7 +7,9 @@ import { catchError, map } from 'rxjs/operators';
 
 const STORAGE_KEY = 'NSIS_APP_STATE';
 
-const storage = new Storage({});
+// platformId is set to PLATFORM_BROWSER_ID value from https://github.com/angular/angular/blob/master/packages/common/src/platform_id.ts
+// we assume we're always in a browser context (not server)
+const storage = new Storage({}, 'browser');
 
 // get/setNested inspired by
 // https://github.com/mickhansen/dottie.js
@@ -47,7 +49,7 @@ function fetchState(): Promise<{}> {
   return storage
     .get(STORAGE_KEY)
     .then(s => s || {})
-    .catch(err => { });
+    .catch(err => {});
 }
 
 function saveState(state: any, keys: string[]): Promise<void> {
@@ -87,7 +89,7 @@ export class StorageSyncEffects {
         });
       })
     )
-      );
+  );
 }
 
 export interface StorageSyncOptions {
@@ -104,7 +106,7 @@ const defaultOptions: StorageSyncOptions = {
 }
 
 export function storageSync(options?: StorageSyncOptions) {
-  const { keys, ignoreActions, hydratedStateKey, onSyncError } = Object.assign({}, defaultOptions, options || {});
+  const {keys, ignoreActions, hydratedStateKey, onSyncError} = Object.assign({}, defaultOptions, options || {});
 
   ignoreActions.push(StorageSyncActions.HYDRATED);
   ignoreActions.push('@ngrx/store/init');
@@ -115,7 +117,7 @@ export function storageSync(options?: StorageSyncOptions) {
 
   return function storageSyncReducer(reducer: ActionReducer<any>) {
     return (state: any, action: any) => {
-      const { type, payload } = action;
+      const {type, payload} = action;
 
       if (type === StorageSyncActions.HYDRATED) {
         state = Object.assign({}, state, payload);

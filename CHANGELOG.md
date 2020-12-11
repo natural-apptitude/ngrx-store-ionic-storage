@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.0.0] - 2020-12-11
+- Upgraded to current versions of Angular and ngrx (both 10+)
+
+## [5.0.0] - 2018-01-01
+- just a placeholder
+
 ## [4.2.0] - 2017-12-13
 - Fix #18 - Ignore store for-feature action
 - Fix #13 - Avoid store injection to fix AOT issues

@@ -1,16 +1,14 @@
 # ngrx-store-ionic-storage
 
-Simple syncing between @ngrx 7 and Ionic Storage.
-
-**If you are looking to use this package with an Ionic 2 or 3 app, please use [version 4](README-v4.md) of this package.**
+Simple syncing between @ngrx and Ionic Storage.
 
 ## Dependencies
 
-This library depends on the store and effects modules from [@ngrx/platform](https://github.com/ngrx/platform) and [Ionic 4](https://ionicframework.com/docs/).
+This library depends on the store and effects modules from [@ngrx/platform](https://github.com/ngrx/platform) and [Ionic](https://ionicframework.com/docs/).
 
 ## Installation
 
-Make sure you have a scaffolded Ionic 4 app. This library supports Ionic version 4 and above. For more details, see the [Ionic documentation](https://ionicframework.com/docs/building/starting).
+Make sure you have a scaffolded Ionic app. This library supports Ionic version 4 and above. For more details, see the [Ionic documentation](https://ionicframework.com/docs/building/starting).
 
 Then run:
 
